@@ -1,0 +1,8 @@
+* {
+	user-select: none;
+}
+
+.p5Label {
+	font-family: consolas;
+	font-weight: bolder;
+}
