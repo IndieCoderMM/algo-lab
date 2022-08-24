@@ -18,53 +18,6 @@ const TOAD = makeConstellation(COLS/3, ROWS/4, [0,2], [1,0], [1,3], [2,0], [2,3]
 
 
 const DATA = [GLIDER, SHIP, TOAD];
- 
-
-class Cell {
-	constructor(row, col) {
-		this.row = row;
-		this.col = col;
-		this.state = 0;
-		this.gen = 0;
-		this.randomState();
-	}
-
-	draw() {
-		let color = [0, 0, 0];
-		if (this.state == 1) {
-			color = [10, 200, 30];
-		} else if (this.state == 2) {
-			color = [200, 20, 20];
-		} else if (this.state == 3) {
-			color = [0, 150, 200];	
-		}
-		fill(...color);
-		rect(this.col*TILEWIDTH, this.row*TILEWIDTH, TILEWIDTH, TILEWIDTH, TILEWIDTH/4);
-		if (this.gen > 0) {
-			fill(255);
-			text(this.gen, this.col*TILEWIDTH+TILEWIDTH/2, this.row*TILEWIDTH+TILEWIDTH/2);
-		}
-	}
-
-	randomState() {
-		this.state = floor(random(2));
-	}
-
-	nextState(n) {
-		if (this.state == 1 && (n > 3 || n < 2)) {
-			this.state = 2;
-		} else if (this.state == 0 && n == 3) {
-			this.state = 3;
-		}
-	}
-
-	changeState() {
-		if (this.state === 1) this.gen ++;
-		else this.gen = 0;
-		if (this.state === 2) this.state = 0;
-		else if (this.state === 3) this.state = 1;
-	}
-}
 
 function setup() {
 	createCanvas(WIDTH, WIDTH);
@@ -97,7 +50,7 @@ function draw() {
 		}
 		describe('Simulating @Generation : ' + generation + ' [ press SPACE to stop ]', LABEL);
 	} else {
-		describe('Editing [ "SPACE"-run, "p"-replay, "R"-refresh, "M_1"-Add, "M_2"-Remove ]', LABEL);
+		describe('Editing [ "SPACE"-run, "p"-replay, "R"-refresh, "M_1"-Add, "M_2"-Remove "1, 2, ..."-Demos ]', LABEL);
 	}
 }
 
@@ -234,3 +187,49 @@ function nextGeneration() {
 	}
 	generation++;
 } 
+
+class Cell {
+	constructor(row, col) {
+		this.row = row;
+		this.col = col;
+		this.state = 0;
+		this.gen = 0;
+		this.randomState();
+	}
+
+	draw() {
+		let color = [0, 0, 0];
+		if (this.state == 1) {
+			color = [10, 200, 30];
+		} else if (this.state == 2) {
+			color = [200, 20, 20];
+		} else if (this.state == 3) {
+			color = [0, 150, 200];	
+		}
+		fill(...color);
+		rect(this.col*TILEWIDTH, this.row*TILEWIDTH, TILEWIDTH, TILEWIDTH, TILEWIDTH/4);
+		if (this.gen > 0) {
+			fill(255);
+			text(this.gen, this.col*TILEWIDTH+TILEWIDTH/2, this.row*TILEWIDTH+TILEWIDTH/2);
+		}
+	}
+
+	randomState() {
+		this.state = floor(random(2));
+	}
+
+	nextState(n) {
+		if (this.state == 1 && (n > 3 || n < 2)) {
+			this.state = 2;
+		} else if (this.state == 0 && n == 3) {
+			this.state = 3;
+		}
+	}
+
+	changeState() {
+		if (this.state === 1) this.gen ++;
+		else this.gen = 0;
+		if (this.state === 2) this.state = 0;
+		else if (this.state === 3) this.state = 1;
+	}
+}
