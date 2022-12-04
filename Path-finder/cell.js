@@ -6,27 +6,44 @@ class Cell {
     this.x = this.col * this.size;
     this.y = this.row * this.size;
     this.block = false;
-    this.color = color(255);
+    this.gScore = Number.POSITIVE_INFINITY;
+    this.hScore = Number.POSITIVE_INFINITY;
+    this.cameFrom = null;
+    this.neighbors = [];
   }
 
-  makeStart() {
-    this.color = color(255, 40, 40);
-  }
-
-  makeEnd() {
-    this.color = color(50, 250, 40);
+  get fScore() {
+    return this.gScore + this.hScore;
   }
 
   makeBlock() {
-    this.color = color(0);
+    this.block = true;
   }
 
   unBlock() {
-    this.color = color(255);
+    this.block = false;
   }
 
-  draw() {
-    fill(this.color);
+  draw(rgb = color(76, 175, 80)) {
+    fill(rgb);
+    noStroke();
+    if (this.block) {
+      fill(color(121, 85, 72));
+    }
     rect(this.x, this.y, this.size, this.size);
+  }
+
+  updateNeighbors(grid) {
+    for (let i = -1; i < 2; i += 2) {
+      const row = this.row + i;
+      const col = this.col + i;
+      if (row >= 0 && row < grid.length) {
+        this.neighbors.push(grid[row][this.col]);
+      }
+      if (col >= 0 && col < grid[0].length) {
+        this.neighbors.push(grid[this.row][col]);
+      }
+    }
+    this.neighbors = this.neighbors.filter((neighbor) => !neighbor.block);
   }
 }

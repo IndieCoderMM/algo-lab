@@ -1,67 +1,66 @@
 const WIDTH = 400;
-const HEIGHT = 500;
-const CELL_SIZE = 20;
+const GRID = 20;
+const CELL_SIZE = WIDTH / GRID;
 
-let grid = [];
-let startMarked = false;
-let endMarked = false;
+let map;
+let astar;
+let searching = false;
 
 function setup() {
   createCanvas(WIDTH, WIDTH);
   frameRate(20);
-  makeGrid();
+  map = new Map({ gridSize: GRID, cellSize: CELL_SIZE });
+  astar = new Astar();
 }
 
 function draw() {
-  background(0);
-  grid.forEach((cell) => cell.draw());
+  background(color(76, 175, 80));
+  map.draw();
+  if (!searching) return;
+  astar.search();
+  astar.drawSearch();
+  astar.drawPath();
 }
 
-function makeGrid() {
-  const totalRow = ceil(HEIGHT / CELL_SIZE);
-  const totalCol = ceil(WIDTH / CELL_SIZE);
-  for (let i = 0; i < totalRow; i++) {
-    for (let j = 0; j < totalCol; j++) {
-      const newCell = new Cell({ row: i, col: j, size: CELL_SIZE });
-      grid.push(newCell);
+function keyPressed() {
+  if (key === 'Enter') {
+    if (map.startPoint && map.targetPoint) {
+      map.updateCells();
+      // start algorithm
+      astar.init(map.startPoint, map.targetPoint);
+      searching = true;
     }
   }
 }
 
 function mousePressed() {
-  if (!startMarked) {
-    startMarked = true;
-    editGrid('start');
+  if (!map.startPoint) {
+    const [row, col] = getRowColFromMouse();
+    map.startPoint = map.grid[row][col];
     return;
   }
-  if (!endMarked) {
-    endMarked = true;
-    editGrid('end');
+
+  if (!map.targetPoint) {
+    const [row, col] = getRowColFromMouse();
+    map.targetPoint = map.grid[row][col];
     return;
   }
-  editGrid();
+  handleMouseEdit();
 }
 
 function mouseDragged() {
-  editGrid();
+  if (!map.startPoint || !map.targetPoint) return;
+  handleMouseEdit();
 }
 
-function editGrid(state = 'block') {
-  const x = floor(mouseX / CELL_SIZE);
-  const y = floor(mouseY / CELL_SIZE);
-  grid.forEach((cell) => {
-    if (cell.row === y && cell.col === x) {
-      switch (state) {
-        case 'block':
-          cell.makeBlock();
-          break;
-        case 'start':
-          cell.makeStart();
-          break;
-        case 'end':
-          cell.makeEnd();
-          break;
-      }
-    }
-  });
+function handleMouseEdit() {
+  const [row, col] = getRowColFromMouse();
+  if (mouseButton === LEFT) map.grid[row][col].makeBlock();
+  else map.grid[row][col].unBlock();
+}
+
+function getRowColFromMouse() {
+  const row = floor(mouseY / CELL_SIZE);
+  const col = floor(mouseX / CELL_SIZE);
+  if (row < GRID && row >= 0 && col < GRID && col >= 0) return [row, col];
 }
