@@ -1,6 +1,6 @@
 # 👾 Game Of Life
 
-[Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) is a cellular automaton, played on a 2D grid. The squares on the grid are called **cells**. Player can set up the initial state of grid. When the algorithm starts, every cell evolves based on the defined rules.
+[Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) is a cellular automaton, played on a 2D grid. Player can set up the initial state of grid. When the algorithm starts, every cell on the grid evolves based on the defined rules.
 
 # 🚀 [Game of life simulator](https://indiecodermm.github.io/algo-lab/Game-of-life/index.html)
 
