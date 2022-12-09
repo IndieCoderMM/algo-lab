@@ -53,7 +53,7 @@ while open_list is not empty:
 
 # ✨ Inspiration
 
-[AStar by Coding Train](https://github.com/CodingTrain/AStar)
+### [🚂 AStar by Coding Train](https://github.com/CodingTrain/AStar)
 
 # 📖 Additional Resources
 
