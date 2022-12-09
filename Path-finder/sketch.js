@@ -5,6 +5,7 @@ const CELL_SIZE = WIDTH / GRID;
 let map;
 let astar;
 let searching = false;
+let pathFound = false;
 
 function setup() {
   createCanvas(WIDTH, WIDTH);
@@ -16,8 +17,15 @@ function setup() {
 function draw() {
   background(color(76, 175, 80));
   map.draw();
-  if (!searching) return;
-  astar.search();
+  if (!searching) {
+    if (!map.startPoint) describe('Place the start point', LABEL);
+    else if (!map.targetPoint) describe('Place the end point', LABEL);
+    else describe('press ENTER to start', LABEL);
+    return;
+  }
+  if (pathFound) {
+    describe('Path Found! [R]efresh Canvas', LABEL);
+  } else pathFound = astar.search();
   astar.drawSearch();
   astar.drawPath();
 }
@@ -26,20 +34,24 @@ function keyPressed() {
   if (key === 'Enter') {
     if (map.startPoint && map.targetPoint) {
       map.updateCells();
-      // start algorithm
       astar.init(map.startPoint, map.targetPoint);
       searching = true;
     }
+  } else if (key === 'r') {
+    map = new Map({ gridSize: GRID, cellSize: CELL_SIZE });
+    astar = new Astar();
+    searching = false;
+    pathFound = false;
   }
 }
 
 function mousePressed() {
+  if (searching) return;
   if (!map.startPoint) {
     const [row, col] = getRowColFromMouse();
     map.startPoint = map.grid[row][col];
     return;
   }
-
   if (!map.targetPoint) {
     const [row, col] = getRowColFromMouse();
     map.targetPoint = map.grid[row][col];
@@ -49,6 +61,7 @@ function mousePressed() {
 }
 
 function mouseDragged() {
+  if (searching) return;
   if (!map.startPoint || !map.targetPoint) return;
   handleMouseEdit();
 }
