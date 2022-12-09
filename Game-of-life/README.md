@@ -2,11 +2,11 @@
 
 [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) is a cellular automaton, played on a 2D grid.
 
+# 🚀 [Game of life simulator](https://indiecodermm.github.io/algo-lab/Game-of-life/index.html)
+
 <br>
 <img src="gol-demo.gif" width="40%">
 <br><br>
-
-# 🚀 [Game of life simulator](https://indiecodermm.github.io/algo-lab/Game-of-life/index.html)
 
 # ⚙ Rules
 
