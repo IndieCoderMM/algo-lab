@@ -6,6 +6,8 @@
 <img src="astar-demo.gif" width="40%">
 <br><br>
 
+# 🚀 [A-star Pathfinding Visualizer](https://indiecodermm.github.io/algo-lab/Path-finder/index.html)
+
 # ⚙ Algorithm
 
 The formula used in A\* is `f = g + h`. The f, g and h are properties of each Node within the grid.
