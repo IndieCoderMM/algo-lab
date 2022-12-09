@@ -1,7 +1,10 @@
 # 🌟 A-star Path Finder
 
 [A\* search algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm) is one of the best techniques used in path-finding and graph traversals. Many games and maps use this algorithm to find the shortest path very efficiently.
-![Demo](astar-demo.gif)
+
+<br><br>
+<img src="astar-demo.gif" width="40%">
+<br><br>
 
 # ⚙ Algorithm
 
