@@ -14,7 +14,7 @@ Each cell on the grid can be either _Alive_ or _Dead_ according to the following
 
 ### 1. Survival
 
-- Any alive cell with 2 or 3 neighbors lives.
+- Any alive cell with 2 or 3 neighbors survives to the next generation.
 
 ### 2. Underpopulation
 
