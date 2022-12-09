@@ -6,7 +6,7 @@
 <img src="astar-demo.gif" width="40%">
 <br><br>
 
-# 🚀 [A-star Pathfinding Visualizer](https://indiecodermm.github.io/algo-lab/Path-finder/index.html)
+### 🚀 [A-star Pathfinding Visualizer](https://indiecodermm.github.io/algo-lab/Path-finder/index.html)
 
 # ⚙ Algorithm
 
