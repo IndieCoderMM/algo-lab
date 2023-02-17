@@ -4,6 +4,7 @@ class Cell {
     this.collapsed = false;
     this.options = [
       0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+      21,
     ];
     this.tile = null;
     this.neighbors = [];
@@ -120,7 +121,7 @@ class Wavefunction {
   }
 
   draw() {
-    fill(0);
+    fill(255);
 
     this.grid.forEach((row) =>
       row.forEach((cell) => {
@@ -128,7 +129,7 @@ class Wavefunction {
           cell.pos.x * this.tilesize,
           cell.pos.y * this.tilesize,
           this.tilesize,
-          this.tilesize
+          this.tilesize,
         );
         if (cell.collapsed)
           image(
@@ -136,9 +137,9 @@ class Wavefunction {
             cell.pos.x * this.tilesize,
             cell.pos.y * this.tilesize,
             this.tilesize,
-            this.tilesize
+            this.tilesize,
           );
-      })
+      }),
     );
   }
 }
