@@ -3,6 +3,7 @@ class Tile {
     this.img = img;
     this.edges = edges;
   }
+
   isMatch(tile, dir) {
     if (dir === 0) {
       return this.isJoinable(tile.edges[2], this.edges[dir]);

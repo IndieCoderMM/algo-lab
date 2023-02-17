@@ -2,7 +2,7 @@ class Cell {
   constructor(pos) {
     this.pos = pos;
     this.collapsed = false;
-    this.options = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    this.options = [...Object.keys(DUNGEON_DATA)];
     this.tile = null;
     this.neighbors = [];
   }
@@ -11,22 +11,18 @@ class Cell {
   }
 }
 
-class Wavefunction {
-  constructor(tiles, size, tilesize) {
+class WaveFunc {
+  constructor(tileset, size) {
+    this.tileset = tileset;
     this.size = size;
-    this.tiles = tiles;
-    this.tilesize = tilesize;
     this.grid = [];
-  }
-
-  init() {
     this.initGrid();
     this.makeNeighbors();
   }
 
   initGrid() {
     for (let y = 0; y < this.size; y++) {
-      let row = [];
+      const row = [];
       for (let x = 0; x < this.size; x++) {
         const cell = new Cell({ x, y });
         row.push(cell);
@@ -54,57 +50,51 @@ class Wavefunction {
     return this.grid[y][x];
   }
 
-  indexOf(cell) {
-    for (let y = 0; y < this.size; y++)
-      for (let x = 0; x < this.size; x++) {
-        if (this.cellAt(x, y) === cell) return { x, y };
-      }
-  }
-
   getOpenCells() {
-    let openCells = [];
-    for (let y = 0; y < this.size; y++)
-      for (let x = 0; x < this.size; x++) {
-        if (this.cellAt(x, y).collapsed) continue;
-        openCells.push(this.cellAt(x, y));
+    const openCells = [];
+    for (let row of this.grid) {
+      for (let cell of row) {
+        if (!cell.collapsed) openCells.push(cell);
       }
+    }
     return openCells;
   }
 
-  getNextCell() {
+  selectNextCell() {
     const openCells = this.getOpenCells();
+
     if (openCells.length === 0) return;
     let lowestECell = openCells[0];
     for (let cell of openCells) {
       if (cell.entropy < lowestECell.entropy) lowestECell = cell;
     }
-    return lowestECell;
-  }
 
-  isValidOption(guessTile, collapsedTile, dx, dy) {
-    if (dx > 0) return collapsedTile.isMatch(guessTile, 1);
-    if (dx < 0) return collapsedTile.isMatch(guessTile, 3);
-    if (dy > 0) return collapsedTile.isMatch(guessTile, 2);
-    if (dy < 0) return collapsedTile.isMatch(guessTile, 0);
+    return lowestECell;
   }
 
   collapse(cell) {
     cell.collapsed = true;
-    cell.tile = this.tiles[random(cell.options)];
+    cell.tile = this.tileset[random(cell.options)];
+  }
+
+  isValid(tempTile, collapsedTile, dx, dy) {
+    if (dx > 0) return collapsedTile.isMatch(tempTile, 1);
+    if (dx < 0) return collapsedTile.isMatch(tempTile, 3);
+    if (dy > 0) return collapsedTile.isMatch(tempTile, 2);
+    if (dy < 0) return collapsedTile.isMatch(tempTile, 0);
   }
 
   propagate(cell) {
     for (let pos of cell.neighbors) {
-      let availableOpts = [];
-      const allOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
       const neighbor = this.cellAt(pos.x, pos.y);
       if (neighbor.collapsed) continue;
+      let availableOpts = [];
+      const allOptions = [...Object.keys(DUNGEON_DATA)];
       const dx = pos.x - cell.pos.x;
       const dy = pos.y - cell.pos.y;
       for (let opt of allOptions) {
-        if (this.isValidOption(this.tiles[opt], cell.tile, dx, dy)) {
+        if (this.isValid(this.tileset[opt], cell.tile, dx, dy))
           availableOpts.push(opt);
-        }
       }
       if (availableOpts.length === 0) {
         cell.collapsed = false;
@@ -112,28 +102,5 @@ class Wavefunction {
       }
       neighbor.options = availableOpts;
     }
-  }
-
-  draw() {
-    fill(255);
-    noStroke();
-    this.grid.forEach((row) =>
-      row.forEach((cell) => {
-        rect(
-          cell.pos.x * this.tilesize,
-          cell.pos.y * this.tilesize,
-          this.tilesize,
-          this.tilesize,
-        );
-        if (cell.collapsed)
-          image(
-            cell.tile.img,
-            cell.pos.x * this.tilesize,
-            cell.pos.y * this.tilesize,
-            this.tilesize,
-            this.tilesize,
-          );
-      }),
-    );
   }
 }
