@@ -1,4 +1,4 @@
-const MAP_DATA = {
+const DUNGEON_DATA = {
   0: ['OOO', 'KKK', 'OOO', 'TTT'],
   1: ['OOO', 'OOB', 'COO', 'KKK'],
   2: ['OOO', 'OOB', 'BBB', 'BOO'],
@@ -21,4 +21,21 @@ const MAP_DATA = {
   19: ['XBB', 'BBB', 'III', 'LLL'],
   20: ['BBX', 'RRR', 'III', 'BBB'],
   21: ['III', 'LLL', 'GGG', 'RRR'],
+};
+
+const PAPER_DATA = {
+  0: ['BOO', 'OOB', 'DDD', 'LLL'],
+  1: ['OOB', 'RRR', 'DDD', 'BOO'],
+  2: ['UUU', 'BOO', 'OOB', 'LLL'],
+  3: ['UUU', 'RRR', 'BOO', 'OOB'],
+  4: ['DDD', 'LLL', 'UUU', 'RRR'],
+  5: ['UUU', 'AOO', 'DDD', 'OOA'],
+  6: ['UUU', 'AOO', 'DDD', 'OOA'],
+  7: ['DDD', 'LLL', 'UUU', 'RRR'],
+  8: ['DDD', 'LLL', 'UUU', 'RRR'],
+  9: ['DDD', 'LLL', 'UUU', 'RRR'],
+  10: ['UUU', 'OOB', 'DDD', 'BOO'],
+  11: ['BOO', 'RRR', 'OOB', 'LLL'],
+  12: ['OOB', 'RRR', 'BOO', 'LLL'],
+  13: ['UUU', 'BOO', 'DDD', 'OOB'],
 };

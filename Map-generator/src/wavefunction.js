@@ -2,10 +2,7 @@ class Cell {
   constructor(pos) {
     this.pos = pos;
     this.collapsed = false;
-    this.options = [
-      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-      21,
-    ];
+    this.options = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     this.tile = null;
     this.neighbors = [];
   }
@@ -99,10 +96,7 @@ class Wavefunction {
   propagate(cell) {
     for (let pos of cell.neighbors) {
       let availableOpts = [];
-      const allOptions = [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-        20, 21,
-      ];
+      const allOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
       const neighbor = this.cellAt(pos.x, pos.y);
       if (neighbor.collapsed) continue;
       const dx = pos.x - cell.pos.x;
@@ -112,17 +106,17 @@ class Wavefunction {
           availableOpts.push(opt);
         }
       }
-      // if (availableOpts.length === 0) {
-      //   cell.collapsed = false;
-      //   return;
-      // }
+      if (availableOpts.length === 0) {
+        cell.collapsed = false;
+        return;
+      }
       neighbor.options = availableOpts;
     }
   }
 
   draw() {
     fill(255);
-
+    noStroke();
     this.grid.forEach((row) =>
       row.forEach((cell) => {
         rect(

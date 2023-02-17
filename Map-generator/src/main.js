@@ -1,6 +1,6 @@
 const WIDTH = 400;
-const DIM = 15;
-const TOTALTILES = 22;
+const DIM = 10;
+const TOTALTILES = 14;
 const TILEWIDTH = WIDTH / DIM;
 
 const tiles = [];
@@ -8,7 +8,7 @@ const tileImages = [];
 let waveFunc;
 
 function preload() {
-  const path = 'tiles/tiny-dungeon';
+  const path = 'assets/paper-dungeon';
   for (let i = 0; i < TOTALTILES; i++) {
     tileImages[i] = loadImage(`${path}/${i}.png`);
   }
@@ -17,12 +17,10 @@ function preload() {
 function setup() {
   createCanvas(WIDTH, WIDTH);
   for (let i = 0; i < TOTALTILES; i++) {
-    tiles[i] = new Tile(tileImages[i], MAP_DATA[i]);
+    tiles[i] = new Tile(tileImages[i], PAPER_DATA[i]);
   }
-
   waveFunc = new Wavefunction(tiles, DIM, TILEWIDTH);
   waveFunc.init();
-  // waveFunc.cellAt(0, 0).options = [0];
 }
 
 function draw() {
