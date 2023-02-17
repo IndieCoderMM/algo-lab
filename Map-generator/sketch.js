@@ -1,8 +1,8 @@
 const WIDTH = 400;
 const DIM = 15;
-const TOTALTILES = 21;
+const TOTALTILES = 22;
 const TILEWIDTH = WIDTH / DIM;
-let grid = [];
+
 const tiles = [];
 const tileImages = [];
 let waveFunc;
@@ -22,6 +22,7 @@ function setup() {
 
   waveFunc = new Wavefunction(tiles, DIM, TILEWIDTH);
   waveFunc.init();
+  // waveFunc.cellAt(0, 0).options = [0];
 }
 
 function draw() {
@@ -32,35 +33,3 @@ function draw() {
   waveFunc.collapse(selected);
   waveFunc.propagate(selected);
 }
-
-// function isJoinable(e, f) {
-//   const reverse = f.split('').reverse();
-//   return e === reverse.join('');
-// }
-
-// function isMatch(tile1, tile2, cell1, cell2) {
-//   if (cell1.x === cell2.x) {
-//     const dy = cell1.y - cell2.y;
-//     return dy > 0
-//       ? isJoinable(tile1.edges[0], tile2.edges[2])
-//       : isJoinable(tile1.edges[2], tile2.edges[0]);
-//   }
-//   if (cell1.y === cell2.y) {
-//     const dx = cell1.x - cell2.x;
-//     return dx > 0
-//       ? isJoinable(tile1.edges[3], tile2.edges[1])
-//       : isJoinable(tile1.edges[1], tile2.edges[3]);
-//   }
-// }
-
-// function propagate(cell) {
-//   let neighbors = getNeighbors(cell);
-//   for (let neighbor of neighbors) {
-//     let available = [];
-//     for (let index of neighbor.options) {
-//       if (isMatch(tiles[index], cell.tile, neighbor, cell))
-//         available.push(index);
-//     }
-//     neighbor.options = available;
-//   }
-// }

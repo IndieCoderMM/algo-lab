@@ -100,7 +100,7 @@ class Wavefunction {
       let availableOpts = [];
       const allOptions = [
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-        20,
+        20, 21,
       ];
       const neighbor = this.cellAt(pos.x, pos.y);
       if (neighbor.collapsed) continue;
@@ -111,17 +111,17 @@ class Wavefunction {
           availableOpts.push(opt);
         }
       }
-      if (availableOpts.length === 0) {
-        cell.collapsed = false;
-        return;
-      }
+      // if (availableOpts.length === 0) {
+      //   cell.collapsed = false;
+      //   return;
+      // }
       neighbor.options = availableOpts;
     }
   }
 
   draw() {
     fill(0);
-    stroke(255);
+
     this.grid.forEach((row) =>
       row.forEach((cell) => {
         rect(
