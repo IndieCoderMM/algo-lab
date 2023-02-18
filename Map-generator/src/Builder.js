@@ -15,6 +15,13 @@ class Builder {
           this.cellSize,
           this.cellSize,
         );
+        // fill(0);
+        // text(
+        //   cell.options.length,
+        //   cell.pos.x * this.cellSize,
+        //   cell.pos.y * this.cellSize,
+        // );
+        // fill(255);
         if (cell.collapsed) {
           image(
             cell.tile.img,

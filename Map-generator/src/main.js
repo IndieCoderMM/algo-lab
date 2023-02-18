@@ -1,6 +1,6 @@
-const WIDTH = 400;
-const DIM = 10;
-const TOTALTILES = 22;
+const WIDTH = 500;
+const DIM = 25;
+const TOTALTILES = [...Object.keys(CURRENT_MAP)].length;
 const TILEWIDTH = WIDTH / DIM;
 
 const tiles = [];
@@ -12,7 +12,7 @@ let waveFunc;
 let builder;
 
 function preload() {
-  const path = 'assets/tiny-dungeon';
+  const path = 'assets/topdown-map';
   for (let i = 0; i < TOTALTILES; i++) {
     tileImages[i] = loadImage(`${path}/${i}.png`);
   }
@@ -21,9 +21,14 @@ function preload() {
 function setup() {
   createCanvas(WIDTH, WIDTH);
   for (let i = 0; i < TOTALTILES; i++) {
-    tiles[i] = new Tile(tileImages[i], DUNGEON_DATA[i]);
+    tiles[i] = new Tile(tileImages[i], CURRENT_MAP[i]);
   }
-  builder = new Builder(TILEWIDTH, 255);
+  for (let i = 0; i < TOTALTILES; i++) {
+    const tile = tiles[i];
+    tile.makeNeighbors(tiles);
+  }
+
+  builder = new Builder(TILEWIDTH, 240);
   waveFunc = new WaveFunc(tiles, DIM);
 }
 
@@ -53,5 +58,5 @@ function mousePressed() {
   running = true;
   waveFunc = new WaveFunc(tiles, DIM);
 
-  waveFunc.cellAt(startX, startY).options = [random(Object.keys(DUNGEON_DATA))];
+  waveFunc.cellAt(startX, startY).options = [random(Object.keys(CURRENT_MAP))];
 }

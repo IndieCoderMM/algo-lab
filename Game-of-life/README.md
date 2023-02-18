@@ -5,7 +5,7 @@
 # 🚀 [Game of life simulator](https://indiecodermm.github.io/algo-lab/Game-of-life/index.html)
 
 <br>
-<img src="gol-demo.gif" width="40%">
+<img src="gol-demo.gif" width="60%">
 <br><br>
 
 # ⚙ Rules
