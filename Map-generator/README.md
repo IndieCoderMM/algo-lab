@@ -1,7 +1,7 @@
 # 🌊Wave Function Collapse
 This project uses the Wave Function Collapse algorithm to generate random 2D maps. 
 
-## 🚀 [Map Generator](https://indiecodermm.github.io/algo-lab/Map-Generator/index.html)
+## 🚀 [Map Generator](https://indiecodermm.github.io/algo-lab/Map-generator/index.html)
 <br>
 <img src="./wfc_demo.gif" width="60%">
 <br><br>
