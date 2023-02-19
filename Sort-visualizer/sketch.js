@@ -7,6 +7,7 @@ let list;
 let sortCounter;
 let clock;
 let sorting = false;
+let sorted = false;
 
 function setup() {
   createCanvas(WIDTH, HEIGHT);
@@ -14,22 +15,26 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(0, 0, 100);
   let x = 0;
   for (let len of list) {
     x += GAP;
-    stroke(255);
+    stroke(0, 255, 0);
     line(x, HEIGHT, x, HEIGHT - len);
   }
   if (!sorting) {
-    describe('Enter-continue; R-restart;', LABEL);
+    if (sorted) {
+      describe(
+        `Bubble Sort Complete in ${clock} ms. Press [R]-to refresh`,
+        LABEL,
+      );
+    } else describe('Press [Enter]-to sort; [R]-to refresh', LABEL);
     return;
   }
-  let sorted = bubbleSort();
+  sorted = bubbleSort();
 
   if (sorted) {
     sorting = false;
-    describe(`Bubble Sort Complete! [${clock} ms]`, LABEL);
   } else {
     clock = parseInt(millis() - clock);
     describe(`Bubble Sort in Process...[${clock} ms]`, LABEL);
@@ -37,10 +42,10 @@ function draw() {
 }
 
 function keyPressed() {
-  console.log(key);
   if (key === 'Enter') {
     sorting = !sorting;
   } else if (!sorting && key === 'r') {
+    sorted = false;
     newList();
   }
 }

@@ -20,11 +20,13 @@ function draw() {
   if (!searching) {
     if (!map.startPoint) describe('Place the start point', LABEL);
     else if (!map.targetPoint) describe('Place the end point', LABEL);
-    else describe('press ENTER to start', LABEL);
+    else describe('Draw obstacles. (Press ENTER to start...)', LABEL);
     return;
   }
   if (pathFound) {
     describe('Path Found! [R]efresh Canvas', LABEL);
+  } else if (astar.exploreList.length <= 0) {
+    describe('No available path! [R]efresh Canvas', LABEL);
   } else pathFound = astar.search();
   astar.drawSearch();
   astar.drawPath();

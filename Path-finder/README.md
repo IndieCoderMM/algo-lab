@@ -8,7 +8,7 @@
 <img src="astar-demo.gif" width="40%">
 <br><br>
 
-# ⚙ Algorithm
+## ⚙ Algorithm
 
 The formula used in A\* is `f = g + h`. The f, g and h are properties of each Node within the grid.
 
@@ -53,11 +53,8 @@ while open_list is not empty:
         open_list.add(node)
 ```
 
-# ✨ Inspiration
+## 💎 Resources
 
-### [🚂 AStar by Coding Train](https://github.com/CodingTrain/AStar)
-
-# 📖 Additional Resources
-
+- [A\* by Coding Train](https://github.com/CodingTrain/AStar)
 - [Intro to A\*](https://www.redblobgames.com/pathfinding/a-star/introduction.html)
 - [Understanding A\*](https://www.youtube.com/watch?v=i0x5fj4PqP4)
