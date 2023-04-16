@@ -17,7 +17,7 @@
 		<header>
 			<div>
 				<label for="algorithm-select">Algorithm:</label>
-				<select id="algorithm-select" onchange="selectAlgorithm(this.value)">
+				<select id="algorithm-select" >
 					<option value="bubble-sort">Bubble Sort</option>
 					<option value="selection-sort">Selection Sort</option>
 					<option value="insertion-sort">Insertion Sort</option>
@@ -37,8 +37,8 @@
     </section>
     
     <div id="control-buttons">
-      <button onclick="startSorting()">Start</button>
-      <button onclick="resetSorting()">Reset</button>
+      <button id="start-btn">Start</button>
+      <button id="reset-btn">Reset</button>
     </div>
   </main>
 	
